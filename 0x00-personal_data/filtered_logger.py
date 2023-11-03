@@ -20,8 +20,11 @@ class RedactingFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         """Returns filtered data from log records"""
         message = super(RedactingFormatter, self).format(record)
-        return filter_datum(self.fields, self.REDACTION,
-                                message, self.SEPARATOR).replace(';', '; ')
+        return (
+            filter_datum(self.fields, self.REDACTION, message, self.SEPARATOR)
+            .replace(";", "; ")
+            .strip()
+        )
 
 
 def filter_datum(

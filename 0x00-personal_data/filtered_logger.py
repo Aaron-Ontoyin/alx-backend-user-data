@@ -20,7 +20,7 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        """ Returns filtered values from log records """
+        """ Returns filtered data from log records """
         return filter_datum(self.fields, self.REDACTION,
                             super().format(record), self.SEPARATOR)
 
@@ -29,7 +29,7 @@ PII_FIELDS = ("name", "email", "password", "ssn", "phone")
 
 
 def get_db() -> mysql.connector.connection.MYSQLConnection:
-    """ Connection to MySQL environment """
+    """ Connection to MySQL server """
     db_connect = mysql.connector.connect(
         user=os.getenv('PERSONAL_DATA_DB_USERNAME', 'root'),
         password=os.getenv('PERSONAL_DATA_DB_PASSWORD', ''),
@@ -49,7 +49,7 @@ def filter_datum(fields: List[str], redaction: str, message: str,
 
 
 def get_logger() -> logging.Logger:
-    """ Returns a logging.Logger object """
+    """Gets and returns a logging.Logger object"""
     logger = logging.getLogger("user_data")
     logger.setLevel(logging.INFO)
     logger.propagate = False
@@ -65,8 +65,7 @@ def get_logger() -> logging.Logger:
 
 
 def main() -> None:
-    """ Obtain database connection using get_db
-    retrieve all role in the users table and display
+    """ Obtain database connection in the users table and display
     each row under a filtered format
     """
     db = get_db()

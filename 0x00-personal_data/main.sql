@@ -1,5 +1,5 @@
 -- setup mysql server
--- configure permissions
+-- configure database permissions
 CREATE DATABASE IF NOT EXISTS my_db;
 CREATE USER IF NOT EXISTS root@localhost IDENTIFIED BY 'root';
 GRANT ALL PRIVILEGES ON my_db.* TO root@localhost;

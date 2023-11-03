@@ -18,9 +18,10 @@ class RedactingFormatter(logging.Formatter):
         self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
-        return filter_datum(self.fields, self.REDACTION,
-                            super().format(record), self.SEPARATOR)
-
+        """Returns filtered data from log records"""
+        return filter_datum(
+            self.fields, self.REDACTION, super().format(record), self.SEPARATOR
+        )
 
 
 def filter_datum(
@@ -35,4 +36,6 @@ def filter_datum(
     all fields in the log line (message)
     """
     p = "|".join([f"{f}=([^{separator}]*)" for f in fields])
-    return re.sub(p, lambda m: f"{m.group().split('=')[0]}=" f"{redaction}", message)
+    return re.sub(
+        p, lambda m: f"{m.group().split('=')[0]}=" f"{redaction}", message
+    )

@@ -47,8 +47,11 @@ def get_logger() -> logging.Logger:
     logger.setLevel(logging.INFO)
     logger.propagate = False
     stream_handler = logging.StreamHandler()
-    stream_handler.setFormatter(RedactingFormatter(list(("name", "email", "phone",
-                                              "ssn", "password"))))
+    stream_handler.setFormatter(
+        RedactingFormatter(list(
+            ("name", "email", "phone", "ssn", "password")
+        ))
+    )
     logger.addHandler(stream_handler)
     return logger
 

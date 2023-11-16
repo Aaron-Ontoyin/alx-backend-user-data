@@ -1,14 +1,20 @@
 #!/usr/bin/env python3
-""" User module as SQLAlchemy table"""
+"""
+Create a SQLAlchemy model named `User`
+for database table named `users`
+"""
+
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, String, Integer, Sequence
+from sqlalchemy import Column, Integer, String
 
 
 Base = declarative_base()
 
 
 class User(Base):
-    """User Model connecting to table `users` from db"""
+    """ SQLAlchemy model named User
+    for database table named users
+    """
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)

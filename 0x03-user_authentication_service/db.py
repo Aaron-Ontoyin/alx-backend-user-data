@@ -47,7 +47,11 @@ class DB:
         return user
     
     def update_user(self, user_id: int, **kwargs) -> None:
-        """Update user with id user_id with kwargs"""
+        """
+        Update user with id user_id with kwargs
+        :param user_id: The ID of the user to be updated
+        :param kwargs: The key-value pairs to update the user with
+        """
         user = self.find_user_by(id=user_id)
         for attr, value in kwargs.items():
             if not hasattr(user, attr):

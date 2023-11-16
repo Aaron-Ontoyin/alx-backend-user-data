@@ -45,7 +45,7 @@ class DB:
         if user is None:
             raise NoResultFound
         return user
-    
+
     def update_user(self, user_id: int, **kwargs) -> None:
         """
         Update user with id user_id with kwargs
@@ -53,8 +53,9 @@ class DB:
         :param kwargs: The key-value pairs to update the user with
         """
         user = self.find_user_by(id=user_id)
+        user_attrs = ["id", "email", "hashed_password", "session_id", "reset_token"]
         for attr, value in kwargs.items():
-            if not hasattr(user, attr):
+            if attr not in user_attrs:
                 raise ValueError
             setattr(user, attr, value)
         self._session.commit()

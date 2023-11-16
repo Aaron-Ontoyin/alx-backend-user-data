@@ -54,4 +54,3 @@ class DB:
                 raise ValueError
             setattr(user, attr, value)
         self._session.commit()
-        return None
